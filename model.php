@@ -12,6 +12,8 @@ class Model
         $endpoint = 'latest';
         // $access_key = 'API_KEY';
 
+
+        // the code below uses external api for grabing currency rate 
         // Initialize CURL:
         $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -24,13 +26,14 @@ class Model
         $exchangeRates = json_decode($json, true);
 
         // Access the exchange rate values, e.g. GBP:
-        echo $exchangeRates['rates']['USD'];
+        // echo $exchangeRates['rates']['USD'];
 
 
         // testing code below 
         // $ch = 'http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'&from='.$from.'&to='.$to.'&amount='.$amount.'';  
-        echo "<pre>"; 
-        var_dump($exchangeRates);    
+        // echo "<pre>"; 
+        // var_dump($exchangeRates); 
+        return $exchangeRates;   
     }
 
 
