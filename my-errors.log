@@ -1,0 +1,4 @@
+Message:Method grab_currency_exchange_list wasn't successful<br />File: /opt/lampp/htdocs/test/CurrencyConverter/model.php<br />Line: 76<br />Trace: #0 /opt/lampp/htdocs/test/CurrencyConverter/model.php(50): Model->grab_currency_exchange_list()
+#1 /opt/lampp/htdocs/test/CurrencyConverter/converter.php(90): Model->store_currency_exchanges_history(Object(Converter))
+#2 /opt/lampp/htdocs/test/CurrencyConverter/converter.php(106): Converter->exchange_currency(Object(Converter))
+#3 {main}

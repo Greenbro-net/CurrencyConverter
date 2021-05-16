@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once 'model.php';
+
 // the function below displays error
 function display_error()
 {
@@ -9,7 +11,6 @@ function display_error()
         unset($_SESSION['error']);
     }
 }
-
 // the function below displays result of currency conversion
 function display_currency_converstion_result()
 {
@@ -33,6 +34,10 @@ function display_currency_converstion_result()
     color: green;
     font-size: 35px;
 }
+.entries {
+    display: inline;
+    font-size: 15px;
+}
 </style>
 <title>Currency converter</title>
 </head>
@@ -42,7 +47,7 @@ function display_currency_converstion_result()
 <form align="center" action="converter.php" method="post">
 
 <div id="box">
-<h2><center>Currency Converter</center></h2>
+<h2><center>Calculator</center></h2>
 <table>
     <div id="result_block">
     <?php display_currency_converstion_result(); ?>
@@ -85,13 +90,23 @@ function display_currency_converstion_result()
 
 
 
-
-
-
-<h1>Currency converter</h1>
-
-<h2>Calculator<h2>
 <h2>History</h2>
+<?php 
+
+$model = new Model();
+$list_currency_exchanges = $model->grab_currency_exchange_list();
+echo "<pre>";
+// the code below displays list of previous exchanges
+foreach($list_currency_exchanges as $list_currency_exchange) {
+    echo "<p class=\"entries\"> For exchange: " .  $list_currency_exchange['from_currency']  . "</p>";
+    echo "<p class=\"entries\"> What currency we need: " . $list_currency_exchange['to_currency'] . "</p>";
+    echo "<p class=\"entries\"> Amount of money we have for exchange: " . $list_currency_exchange['amount'] . "</p>";
+    echo "<p class=\"entries\"> Amount of money we will get: " . $list_currency_exchange['current_rate_result']. "</p>";
+    echo "<p class=\"entries\"> Time of operation: " . $list_currency_exchange['date_of_exchange']. "</p>";
+    echo "<br>";
+}
+?>
+
 <h2>Settings</h2>
 
 </body>
