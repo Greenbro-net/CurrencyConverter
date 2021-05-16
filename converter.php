@@ -95,9 +95,6 @@ class Converter
 
 
 
-$converter_object = new Converter();
-
-$currency_converstion_result = $converter_object->exchange_currency($converter_object);
 
 
 
@@ -106,8 +103,10 @@ $currency_converstion_result = $converter_object->exchange_currency($converter_o
            $_SESSION['error'] = "Field Enter Amount was empty, fill it and try again";
            header("Location: http://test.net/CurrencyConverter/index.php");
            exit();
-       } else { // successfull case
-           
+          } else { // successfull case
+           $converter_object = new Converter();
+           $currency_converstion_result = $converter_object->exchange_currency($converter_object);
+
            header("Location: http://test.net/CurrencyConverter/index.php?currency_converstion_result=$currency_converstion_result");
            exit();
               }
