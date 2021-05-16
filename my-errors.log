@@ -1,2 +1,0 @@
-Message:Method exchange_currency wasn't successful<br />File: /opt/lampp/htdocs/test/CurrencyConverter/converter.php<br />Line: 84<br />Trace: #0 /opt/lampp/htdocs/test/CurrencyConverter/converter.php(100): Converter->exchange_currency(Object(Converter))
-#1 {main}

@@ -71,6 +71,7 @@ class Converter
         $current_rate = $result['rates'][$from_currency];
         return 1/$current_rate; // there are we find rate of currency by of 1 EUR
     }
+    
     // the method below counts amount of money with currency rate
     public function exchange_currency(Converter $converter_object)
     {
@@ -92,8 +93,6 @@ class Converter
                                            }
     }
 }
-
-
 
 
 

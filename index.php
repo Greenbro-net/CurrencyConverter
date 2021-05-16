@@ -1,7 +1,7 @@
 <?php
-session_start();
 
 require_once 'model.php';
+require_once 'settings.php';
 
 // the function below displays error
 function display_error()
@@ -16,6 +16,26 @@ function display_currency_converstion_result()
 {
     if (!empty($_GET['currency_converstion_result'])) {
         echo "You will get : " . $_GET['currency_converstion_result'] . " with current rate";
+    }
+}
+// function below displays list of all currencies
+function display_all_currencies()
+{
+    $model = new Settings();
+    $list_of_currencies = $model->grab_currencies();
+    
+    foreach ($list_of_currencies as $currency) {
+        echo "<option value=\"$currency\" >$currency</option>";
+    }
+}
+// the function below displays list of currencies which were added to settings.json
+function display_added_currencies()
+{
+    $settings = new Settings();
+    $list_of_added_currencies = $settings->grab_currencies_list();
+
+    foreach ($list_of_added_currencies as $currency) {
+        echo "<option value=\"$currency\" >$currency</option>";
     }
 }
 
@@ -64,18 +84,14 @@ function display_currency_converstion_result()
 <tr>
 <td>
 	<br><center>From:<select name='from_currency'>
-	 <option value="UAH" selected>Ukrainian Hryvnia(UAH)</option>
-	 <option value="USD">US Dollar(USD)</option>
-     <option value="EUR">European Union(EUR)</option>
+      <?php display_added_currencies(); ?>
 	 </select>
 </td>
 </tr>
 <tr>
 	<td>
 	<br><center>To:<select name='to_currency'>
-	 <option value="USD" selected >US Dollar(USD)</option>
-	 <option value="JPY">Japanese Yen(JPY)</option>
-	 <option value="EUR">European Union(EUR)</option>
+     <?php display_added_currencies(); ?>
 	
 	</select>
 </td>
@@ -150,10 +166,34 @@ function display_currency_converstion_result()
 ?>
 
 <h2>Settings</h2>
+  <h4>To form list of currency operations</h4>
 <form action="index.php" method="GET">
 <label for="lname">How many etries you would like to see:</label><br>
 <input type="text" id="number_of_entries" name="number_of_entries">
 <input type='submit' name='submit' value="SubmitListHandler"></center>
+</form>
+
+
+<!-- the code below for currencies managing -->
+<h4>To form list of currencies for exchanging</h4>
+<form action="settings.php" method="POST">
+<label for="lname">What currency you would like to add:</label><br>
+    <td><br><center>From:<select name='add_currency'>
+    <option value="" selected>Choose currency for adding</option>
+        <?php
+           display_all_currencies();
+        ?> 
+    </select></td>
+<!-- the code below for deletes currency from the list -->
+<label for="lname">What currency you would like to delete:</label><br>
+    <td><br><center>From:<select name='delete_currency'>
+    <option value="" selected>Choose currency for deleting</option>
+        <?php
+           display_added_currencies()
+        ?> 
+    </select></td>
+
+<input type='submit' name='submit' value="SubmitCurrencyList"></center>
 </form>
 
 </body>

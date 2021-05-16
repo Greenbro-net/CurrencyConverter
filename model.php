@@ -6,10 +6,8 @@ class Model
     public function call_currency_api()
     {
         $access_key = '02d87d6c411fbe784c4053ef4684cbe3';
-
         // set API Endpoint and API key 
         $endpoint = 'latest';
-
 
         // the code below uses external api for grabing currency rate 
         // Initialize CURL:
@@ -23,7 +21,6 @@ class Model
         // Decode JSON response:
         $exchangeRates = json_decode($json, true);
 
-        
         return $exchangeRates;   
     }
 
