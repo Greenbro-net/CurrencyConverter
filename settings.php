@@ -55,13 +55,11 @@ class Settings
         foreach ($existing_currencies_list as $currency_key => $existing_currency) {
             if ($existing_currency == $currency_for_deleting) {
                 unset($existing_currency);
-                // unset($currency_key);
             }
             if (!empty($existing_currency)) {
                 $new_existing_currencies_list[] = $existing_currency;
             }
-            
-
+        
         }
         $existing_currencies_list = array_filter($new_existing_currencies_list);
 
@@ -74,6 +72,28 @@ class Settings
                  }
 
     }
+
+    // the method bellow handler for add_currency method
+    public function add_currency_handler($result_of_add_currency)
+    {
+        if (empty($result_of_add_currency)) { // error case
+            throw new Exception("Method add_currency returns false, there is error");
+        } else { // success case
+           header("Location: http://test.net/CurrencyConverter/index.php");
+           exit();
+               }
+    }
+    // the method bellow handler for delete_currency method
+    public function delete_currency_handler($result_of_delete_currency)
+    {
+         if (empty($result_of_delete_currency)) { // error case
+                     throw new Exception("Method delete_currency returns false, there is error");
+                 } else { // success case
+                    header("Location: http://test.net/CurrencyConverter/index.php");
+                    exit();
+                        }
+    }
+    
     // the method below handling request for currencies list
     public function currency_handler()
     {
@@ -93,22 +113,12 @@ class Settings
             // the block of code below for adding new currency
             if (!empty($_POST['add_currency'])) {
                  $result_of_add_currency = $this->add_currency();
-                 if (empty($result_of_add_currency)) { // error case
-                     throw new Exception("Method add_currency returns false, there is error");
-                 } else { // success case
-                    header("Location: http://test.net/CurrencyConverter/index.php");
-                    exit();
-                        }
+                 $this->add_currency_handler($result_of_add_currency);
             } 
             // the block of code below for deletion currency
             if (!empty($_POST['delete_currency'])) {
                  $result_of_delete_currency = $this->delete_currency();
-                 if (empty($result_of_delete_currency)) { // error case
-                     throw new Exception("Method delete_currency returns false, there is error");
-                 } else { // success case
-                    header("Location: http://test.net/CurrencyConverter/index.php");
-                    exit();
-                        }
+                $this->delete_currency_handler($result_of_delete_currency);
             }
                  
                } catch (Exception $exception) {

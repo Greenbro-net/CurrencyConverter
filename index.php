@@ -38,6 +38,16 @@ function display_added_currencies()
         echo "<option value=\"$currency\" >$currency</option>";
     }
 }
+// function below displays history of currency exchange
+function display_exchange_operation($list_currency_exchange)
+{
+    echo "<p class=\"entries\"> For exchange: " .  $list_currency_exchange['from_currency']  . "</p>";
+    echo "<p class=\"entries\"> What currency we need: " . $list_currency_exchange['to_currency'] . "</p>";
+    echo "<p class=\"entries\"> Amount of money we have for exchange: " . $list_currency_exchange['amount'] . "</p>";
+    echo "<p class=\"entries\"> Amount of money we will get: " . $list_currency_exchange['current_rate_result']. "</p>";
+    echo "<p class=\"entries\"> Time of operation: " . $list_currency_exchange['date_of_exchange']. "</p>";
+    echo "<br>";
+}
 
 ?>
 
@@ -118,28 +128,17 @@ function display_added_currencies()
         if (empty($number)) { // display all entries which we have
             // the code below displays list of previous exchanges
             foreach($list_currency_exchanges as $list_currency_exchange) {
-                echo "<p class=\"entries\"> For exchange: " .  $list_currency_exchange['from_currency']  . "</p>";
-                echo "<p class=\"entries\"> What currency we need: " . $list_currency_exchange['to_currency'] . "</p>";
-                echo "<p class=\"entries\"> Amount of money we have for exchange: " . $list_currency_exchange['amount'] . "</p>";
-                echo "<p class=\"entries\"> Amount of money we will get: " . $list_currency_exchange['current_rate_result']. "</p>";
-                echo "<p class=\"entries\"> Time of operation: " . $list_currency_exchange['date_of_exchange']. "</p>";
-                echo "<br>";
+                display_exchange_operation($list_currency_exchange);
             }
-        } else {
+        } else { // display current number of entries
             // the code below gets how many arrays are
             $number_of_arrays = count($list_currency_exchanges);
             $start_from = $number_of_arrays - $number;
             foreach($list_currency_exchanges as $key_number =>$list_currency_exchange) {
-                        
                         if ($key_number < $start_from) {
                             continue;
                         } else {
-                            echo "<p class=\"entries\"> For exchange: " .  $list_currency_exchange['from_currency']  . "</p>";
-                            echo "<p class=\"entries\"> What currency we need: " . $list_currency_exchange['to_currency'] . "</p>";
-                            echo "<p class=\"entries\"> Amount of money we have for exchange: " . $list_currency_exchange['amount'] . "</p>";
-                            echo "<p class=\"entries\"> Amount of money we will get: " . $list_currency_exchange['current_rate_result']. "</p>";
-                            echo "<p class=\"entries\"> Time of operation: " . $list_currency_exchange['date_of_exchange']. "</p>";
-                            echo "<br>";
+                            display_exchange_operation($list_currency_exchange);
                                }
                         }
                }
