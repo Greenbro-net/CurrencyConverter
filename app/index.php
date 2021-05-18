@@ -1,9 +1,11 @@
 <?php
 
-// TO DO cover all method which returns something try-catch blocks and 50 percent of API has to be covered UNIT Test 
+
 
 require_once 'model.php';
 require_once 'settings.php';
+
+
 
 // the function below displays error
 function display_error()
@@ -158,7 +160,7 @@ function display_exchange_operation($list_currency_exchange)
     }
 
     if (!empty($_POST['SubmitListHandler']) && !empty($_GET['number_of_entries'])) {
-        header("Location: http://test.net/CurrencyConverter/index.php?number_of_entries=$number_of_entries");
+        header("Location: http://test.net/CurrencyConverter/app/index.php?number_of_entries=$number_of_entries");
         exit();
     }
 

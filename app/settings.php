@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once 'model.php';
-
 class Settings
 {
     // the method below returns currencies
@@ -90,7 +88,7 @@ class Settings
         if (empty($result_of_add_currency)) { // error case
             throw new Exception("Method add_currency returns false, there is error");
         } else { // success case
-           header("Location: http://test.net/CurrencyConverter/index.php");
+           header("Location: http://test.net/CurrencyConverter/app/index.php");
            exit();
                }
     }
@@ -100,7 +98,7 @@ class Settings
          if (empty($result_of_delete_currency)) { // error case
                      throw new Exception("Method delete_currency returns false, there is error");
                  } else { // success case
-                    header("Location: http://test.net/CurrencyConverter/index.php");
+                    header("Location: http://test.net/CurrencyConverter/app/index.php");
                     exit();
                         }
     }
@@ -111,13 +109,13 @@ class Settings
         try {
           if (empty($_POST['delete_currency']) && empty($_POST['add_currency'])) {
             $_SESSION['error'] = "You should choose currency if you want add or delete it";
-            header("Location: http://test.net/CurrencyConverter/index.php");
+            header("Location: http://test.net/CurrencyConverter/app/index.php");
             exit();
           }
           // the code below if user choses both option delete and add
           elseif (!empty($_POST['delete_currency']) && !empty($_POST['add_currency'])) {
             $_SESSION['error'] = "You can't choose both variant: add and delete";
-            header("Location: http://test.net/CurrencyConverter/index.php");
+            header("Location: http://test.net/CurrencyConverter/app/index.php");
             exit();
           }
             
