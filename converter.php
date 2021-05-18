@@ -73,7 +73,7 @@ class Converter
     }
     
     // the method below counts amount of money with currency rate
-    public function exchange_currency(Converter $converter_object)
+    public function exchange_currency(Converter $converter_object) 
     {
         try {
             $model = new Model();

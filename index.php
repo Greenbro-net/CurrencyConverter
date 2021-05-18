@@ -1,5 +1,7 @@
 <?php
 
+// TO DO cover all method which returns something try-catch blocks and 50 percent of API has to be covered UNIT Test 
+
 require_once 'model.php';
 require_once 'settings.php';
 

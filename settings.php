@@ -8,9 +8,20 @@ class Settings
     // the method below returns currencies
     public function grab_currencies()
     {
-        $model = new Model();
-        $result = $model->call_currency_api();
-        return array_keys($result['rates']);
+        try {
+            $model = new Model();
+            $result = $model->call_currency_api();
+            $result_grab_currencies = array_keys($result['rates']);
+          if (empty($result_grab_currencies)) {
+              throw new Exception("Method grab_currencies wasn't successful");
+            } else {
+               return $result_grab_currencies;
+                   }
+
+            } catch (Exception $exception) {
+                    file_put_contents("my-errors.log", 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                    'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
+                                           } 
     }
     // the method below grabs list of currencies from settings.json
     public function grab_currencies_list()
@@ -93,7 +104,7 @@ class Settings
                     exit();
                         }
     }
-    
+
     // the method below handling request for currencies list
     public function currency_handler()
     {
