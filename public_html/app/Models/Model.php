@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+
+use Exception;
 class Model
 {
 
@@ -28,13 +31,13 @@ class Model
                  }
                
              } catch (Exception $exception) {
-                file_put_contents("my-errors.log", 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                file_put_contents(realpath("my-errors.log"), 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
                 'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
                                             }
     } 
 
     // method below gets array from object
-    public function get_array(Converter $input_object)
+    public function get_array(\App\Controllers\ConverterController $input_object) 
     {   
         try {
           if (empty($input_object)) {
@@ -49,14 +52,14 @@ class Model
                    }
             
             } catch (Exception $exception) {
-                file_put_contents("my-errors.log", 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                file_put_contents(realpath("my-errors.log"), 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
                 'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
                                            }
         
     }
 
     // the method below writes history of currency exchanges to history.json
-    public function store_currency_exchanges_history(Converter $converter_object)
+    public function store_currency_exchanges_history(\App\Controllers\ConverterController $converter_object)
     {
         try {
           if (empty($converter_object)) {
@@ -70,14 +73,14 @@ class Model
             $existing_list[] = $array_for_writing;
             $json_array = json_encode($existing_list);
             // the code below writes array to json file
-            $result_store_currency_exchanges_history = file_put_contents("history.json", $json_array,  LOCK_EX);
+            $result_store_currency_exchanges_history = file_put_contents("../history.json", $json_array,  LOCK_EX);
             
           if (empty($result_store_currency_exchanges_history)) {
                 throw new Exception("Method store_currency_exchanges_history wasn't successful");
           }
 
             } catch (Exception $exception) {
-                file_put_contents("my-errors.log", 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                file_put_contents(realpath("my-errors.log"), 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
                 'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
                                            }
     }
@@ -86,7 +89,7 @@ class Model
     public function grab_currency_exchange_list()
     {
          try {
-            $list_of_exchanges_array = json_decode(file_get_contents("history.json"), true);
+            $list_of_exchanges_array = json_decode(file_get_contents("/opt/lampp/htdocs/test/CurrencyConverter/app/history.json"), true);
             
             if (empty($list_of_exchanges_array)) {
                 throw new Exception("Method grab_currency_exchange_list wasn't successful");
@@ -95,10 +98,41 @@ class Model
                        }
 
             } catch (Exception $exception) {
-                file_put_contents("my-errors.log", 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                file_put_contents(realpath("my-errors.log"), 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
                 'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
                                            }
     }
+
+    // the method below grabs list of currencies from settings.json
+    public function grab_currencies_list()
+    {
+        try {
+           $list_of_currencies = json_decode(file_get_contents("/opt/lampp/htdocs/test/CurrencyConverter/app/settings.json"), true);
+
+           if (empty($list_of_currencies)) {
+              throw new Exception("Method grab_currencies_list wasn't successful");
+               } else {
+                    return $list_of_currencies;
+                      }
+            } catch (Exception $exception) {
+                file_put_contents(realpath("my-errors.log"), 'Message:' . $exception->getMessage() . '<br />'.   'File: ' . $exception->getFile() . '<br />' .
+                'Line: ' . $exception->getLine() . '<br />' .'Trace: ' . $exception->getTraceAsString());
+                                           }
+    }
+
+    // the method below writes data of list of currencies to settings.json
+    public function write_currency_list_to_json($current_currency_list)
+    {
+        $json_array = json_encode($existing_currencies_list);
+         // the code below writes array to json file
+         $result_of_add_currency = file_put_contents('/opt/lampp/htdocs/test/CurrencyConverter/app/settings.json', $json_array,  LOCK_EX);
+         if (empty($result_of_add_currency)) { // error case
+             return false;
+          } else { // success case
+             return true;
+                 }
+    }
+    
 
 
 }

@@ -1,0 +1,4 @@
+Message:Method grab_currencies_list wasn't successful<br />File: /opt/lampp/htdocs/test/CurrencyConverter/app/Models/Model.php<br />Line: 113<br />Trace: #0 /opt/lampp/htdocs/test/CurrencyConverter/app/Controllers/SettingController.php(174): App\Models\Model->grab_currencies_list()
+#1 /opt/lampp/htdocs/test/CurrencyConverter/app/index.php(45): App\Controllers\SettingController->call_grab_currencies_list(Object(App\Models\Model))
+#2 /opt/lampp/htdocs/test/CurrencyConverter/app/index.php(110): display_added_currencies()
+#3 {main}
