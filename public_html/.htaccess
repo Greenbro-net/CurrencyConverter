@@ -1,9 +1,9 @@
 RewriteEngine on
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-SSL} !on
-RewriteCond %{HTTP_HOST} ^test\.net$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.test\.net$
-
+RewriteCond %{HTTP_HOST} ^greenbro\.net$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.greenbro\.net$
+RewriteRule ^(.*)$ "https\:\/\/greenbro\.net\/$1" [R=301,L]
 
 
 
@@ -14,3 +14,5 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule ^ index.php [QSA,L]
+
+
