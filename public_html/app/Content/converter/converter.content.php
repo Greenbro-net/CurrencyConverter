@@ -1,23 +1,3 @@
-<html>
-<head>
-<style>
-#error_block {
-    color: red;
-
-}
-#result_block {
-    color: green;
-    font-size: 35px;
-}
-.entries {
-    display: inline;
-    font-size: 15px;
-}
-</style>
-<title>Currency converter</title>
-</head>
-
-<body>
 
 <form align="center" action="http://currency_converter.com/converter/preparing_call_exchange_currency" method="post">
 
@@ -81,7 +61,10 @@
 
 <h2>Settings</h2>
   <h4>To form list of currency operations</h4>
-<form action="http://currency_converter.com" method="GET">
+
+  <input type="button" id="quantity_of_operation_button" onclick="show_hide_quantity_operations()" value="Show/Hide Button">
+
+<form id="quantity_of_operations" action="http://currency_converter.com" method="GET">
 <label for="lname">How many etries you would like to see:</label><br>
 <input type="text" id="number_of_entries" name="number_of_entries">
 <input type='submit' name='submit' value="SubmitListHandler"></center>
@@ -90,7 +73,10 @@
 
 <!-- the code below for adding  currencies to settings.json  -->
 <h4>To form list of currencies for exchanging</h4>
-<form action="http://currency_converter.com/currency/currency_handler" method="POST">
+
+   <input type="button" id="quantity_of_currencies_button" onclick="show_hide_currency_handlerr()" value="Show/Hide Button">
+
+<form id="quantity_of_currencies" action="http://currency_converter.com/currency/currency_handler" method="POST">
 <label for="lname">What currency you would like to add:</label><br>
     <td><br><center>From:<select name='add_currency'>
     <option value="" selected>Choose currency for adding</option>
