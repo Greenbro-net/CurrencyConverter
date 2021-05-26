@@ -33,16 +33,15 @@ function display_all_currencies()
 {   
     try {
     
-        $currency_controller_obj = new CurrencyController();
-        // var_dump($object_setting_controller instanceof CurrencyController);
-        if (!$currency_controller_obj instanceof CurrencyController) {
-            throw new Exception("Object of setting_controller wasn't instanceof CurrencyController");
+        $currency_controller_obj = new App\Controllers\CurrencyController();
+    
+        if (!$currency_controller_obj instanceof \App\Controllers\CurrencyController) {
+            throw new Exception("Current object didn't instanceof CurrencyController");
         }
         $list_of_currencies = $currency_controller_obj->grab_all_currencies();
-        // unset($list_of_currencies);
 
         if (empty($list_of_currencies)) {
-            // throw new Exception("Function display_all_currencies wasn't succsessful");
+            throw new Exception("Function display_all_currencies wasn't succsessful");
         }
     
             foreach ($list_of_currencies as $currency) {
@@ -58,9 +57,9 @@ function display_all_currencies()
 // the function below displays list of currencies which were added to settings.json
 function display_added_currencies()
 {
-    $currency_obj = new CurrencyController();
+    $currency_controller_obj = new App\Controllers\CurrencyController();
 
-    $list_of_added_currencies = $currency_obj->call_grab_currencies_list();
+    $list_of_added_currencies = $currency_controller_obj->call_grab_currencies_list();
 
     foreach ($list_of_added_currencies as $currency) {
         echo "<option value=\"$currency\" >$currency</option>";
@@ -82,7 +81,7 @@ function handler_quantity_exchange_list()
 function display_list_of_exchanges($number)
 {   
     
-    $converter_controller_obj = new ConverterController();
+    $converter_controller_obj = new App\Controllers\ConverterController();
     $list_currency_exchanges = $converter_controller_obj->call_grab_currency_exchange_list();
     echo "<pre>";
     if (empty($number)) { // display all entries which we have

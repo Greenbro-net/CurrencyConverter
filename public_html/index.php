@@ -4,8 +4,6 @@ require_once realpath('vendor/autoload.php');
 require_once '../config.php';
 
 
-
-
 // the function below checkout does methods and controllers exist or not
 function checkout_url()
 { 
@@ -27,9 +25,13 @@ function checkout_url()
         $short_controller_names[$controller_key] = $file_controller_array[0];
     }
 
+
     // the function below gets methods name and create array with class methods
     foreach($controller_names as $controller_name) {
+        // the code below adds namespace to controller name
+        $controller_name = "\App\Controllers\\" . $controller_name;
         $arrays_method_names[] = get_class_methods($controller_name);
+
     }
     // the function below create makes one simple array and delete three methods 
     foreach($arrays_method_names as $method_names) {
@@ -72,7 +74,7 @@ function checkout_url()
         }
     // if page does not exists you will be located in 404.php
     if ($variable !== TRUE) {
-        // die("Fuck you");
+        
         $page_404 = new troubleController();
         $page_404->page_404();
     }

@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" verbose="true" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage>
+  <!-- <coverage>
     <include>
-      <directory suffix=".php">./app</directory>
+      <directory suffix=".model.php">./app</directory>
     </include>
-  </coverage>
+  </coverage> -->
+
   <testsuites>
     <testsuite name="Test suite">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+
+  <!-- <blacklist>
+    <directory suffix=".models.php">/app/Models</directory>
+    <file>/app/Models</file> -->
+    <!-- <exclude>
+      <directory suffix=".php">/path/to/files</directory>
+      <file>/path/to/file</file>
+    </exclude> -->
+  <!-- </blacklist> -->
+<!-- 
+   <whitelist processUncoveredFilesFromWhitelist="true">
+    <directory suffix=".php">/app/Models</directory>
+    <file>/app/Models/UserModel.model</file>
+    <exclude>
+      <directory suffix=".php">/path/to/files</directory>
+      <file>/path/to/file</file>
+    </exclude>
+  </whitelist> -->
+
+
 </phpunit>

@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+use Exception;
+
 class CurrencyModel
 {
     // the method below grabs list of currencies from current_currencies_list.json

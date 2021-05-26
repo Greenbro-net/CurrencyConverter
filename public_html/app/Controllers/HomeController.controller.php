@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Controllers\CurrencyController;
+
 class HomeController extends Controller
 {
     // the method below for default page

@@ -25,6 +25,8 @@ class Application
         // the code below for name of controller in upper case
         elseif (file_exists(CONTROLLER. ucfirst(self::$controller) . '.controller.php'))
         {
+            self::$controller =  'App\Controllers\\' . ucfirst(self::$controller);
+
             self::$controller = new self::$controller;
             if(method_exists(self::$controller, self::$action)) {
                  call_user_func_array([self::$controller, self::$action], self::$prams);

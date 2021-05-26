@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use Exception;
+
 class ConverterController extends Controller
 {
     public $from_currency ;
@@ -7,10 +12,7 @@ class ConverterController extends Controller
     public $to_currency;
     public $date_of_exchange;
     public $current_rate_result;
-
-
-    
-    // when we call to the url by controller and method name it creates instance of controller class 
+ 
 
     public function __construct() 
     {
@@ -115,8 +117,8 @@ class ConverterController extends Controller
         try {
           $converter_model_obj = $this->load_model('ConverterModel');
           // the code below checks in right model or not
-          if (!$converter_model_obj instanceof ConverterModel) {
-              throw new Exception("Object of ConverterModel didn't instance of ConverterModel class");
+          if (!$converter_model_obj instanceof \App\Models\ConverterModel) {
+              throw new Exception("Current object didn't instance of ConverterModel class");
           }
             $result_call_grab_currency_exchange_list = $converter_model_obj->grab_currency_exchange_list();
           if (empty($result_call_grab_currency_exchange_list)) {

@@ -1,6 +1,11 @@
 <?php
 
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use Exception;
+
 class CurrencyController extends Controller
 {
     // the method below returns all currencies
@@ -28,7 +33,7 @@ class CurrencyController extends Controller
       try {  
         $currency_model_obj = $this->load_model('CurrencyModel');
         
-        if (!$currency_model_obj instanceof CurrencyModel) {
+        if (!$currency_model_obj instanceof \App\Models\CurrencyModel) {
             throw new Exception("Current object didn't instance of CurrencyModel class");
         }
          $current_currency_list = $currency_model_obj->grab_currencies_list();
@@ -67,7 +72,7 @@ class CurrencyController extends Controller
         try {
             $currency_model_obj = $this->load_model("CurrencyModel");
 
-            if (!$currency_model_obj instanceof CurrencyModel) {
+            if (!$currency_model_obj instanceof \App\Models\CurrencyModel) {
                 throw new Exception("Current object didn't instance of CurrencyModel class");
             }
             $existing_currencies_list = $currency_model_obj->grab_currencies_list();
@@ -144,7 +149,7 @@ class CurrencyController extends Controller
         try {  
             $currency_model_obj = $this->load_model('CurrencyModel');
             // the code below checks in right model or not
-            if (!$currency_model_obj instanceof CurrencyModel) {
+            if (!$currency_model_obj instanceof \App\Models\CurrencyModel) {
                 throw new Exception("Object of CurrencyModel didn't instance of CurrencyModel class");
             }
              $existing_currencies_list = $currency_model_obj->grab_currencies_list();

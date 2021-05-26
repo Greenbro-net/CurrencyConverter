@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models;
+
+use App\Controllers\ConverterController;
+use Exception;
+
 class ConverterModel
 {
    // the method  below calls external api for grabing currency rate

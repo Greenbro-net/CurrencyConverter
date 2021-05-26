@@ -1,9 +1,15 @@
 <?php
 
+namespace App\Core;
+
+use View;
+use Exception;
+
 class Controller
 {
     protected $view;
     protected $model;
+    protected $namespace = 'App\Models\\';
 
 
     public function view($viewName, $data =[])
@@ -12,13 +18,17 @@ class Controller
         return $this->view;
     }
 
-    public function model($modelName, $data=[])
+    public function model( $modelName, $data=[])
     {
         try {
                 if(file_exists(MODEL . $modelName . '.model.php'))
                 {
                     // there are we were changed require to require_once for escaping Error from model which load a few times
                     require_once MODEL . $modelName . '.model.php';
+
+                    // the code below adds namespace to model name
+                    $modelName = $this->namespace . $modelName;
+
                     $this->model = new $modelName;
                 } else {
                     throw new Exception("Method model wasn't successful");
@@ -37,6 +47,10 @@ class Controller
                 {
                     // there are we were changed require to require_once for escaping Error from model which load a few times
                     require_once MODEL . $modelName . '.model.php';
+
+                    // the code below adds namespace to model name
+                    $modelName = $this->namespace . $modelName;
+ 
                     return $this->model = new $modelName;
                 } else {
                     throw new Exception("Method load_model wasn't successful");
