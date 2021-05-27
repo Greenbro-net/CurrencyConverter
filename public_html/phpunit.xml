@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" verbose="true" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  
   <!-- <coverage>
     <include>
       <directory suffix=".model.php">./app</directory>
@@ -20,15 +21,20 @@
       <file>/path/to/file</file>
     </exclude> -->
   <!-- </blacklist> -->
-<!-- 
-   <whitelist processUncoveredFilesFromWhitelist="true">
-    <directory suffix=".php">/app/Models</directory>
-    <file>/app/Models/UserModel.model</file>
+
+   <!-- <whitelist processUncoveredFilesFromWhitelist="true">
+    <directory suffix=".php">app</directory>
+    <file></file>
     <exclude>
       <directory suffix=".php">/path/to/files</directory>
       <file>/path/to/file</file>
     </exclude>
-  </whitelist> -->
+  </whitelist> 
+
+  <logging>
+        <log type="coverage-html" target="app"
+        lowUpperBound="35" highLowerBound="70"/>
+    </logging> -->
 
 
 </phpunit>

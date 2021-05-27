@@ -1,5 +1,6 @@
 <?php
 
+
 require_once realpath('vendor/autoload.php');
 require_once '../config.php';
 
@@ -29,7 +30,9 @@ function checkout_url()
     // the function below gets methods name and create array with class methods
     foreach($controller_names as $controller_name) {
         // the code below adds namespace to controller name
-        $controller_name = "\App\Controllers\\" . $controller_name;
+        $namespace = "\App\Controllers\\";
+        $controller_name = $namespace . $controller_name;
+        
         $arrays_method_names[] = get_class_methods($controller_name);
 
     }
